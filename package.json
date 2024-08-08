@@ -1,0 +1,22 @@
+{
+  "name": "parse-osr",
+  "version": "0.0.1",
+  "description": "A simple parser for osu! replay (.osr) file format.",
+  "license": "MIT",
+  "author": "OlaMushroom",
+  "type": "module",
+  "main": "index.js",
+  "module": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.ts",
+    "index.d.ts"
+  ],
+  "dependencies": {
+    "leb": "^1.0.0",
+    "lzma": "^2.3.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.3"
+  }
+}
