@@ -5,21 +5,23 @@
   "license": "MIT",
   "author": "OlaMushroom",
   "type": "module",
-  "main": "index.js",
-  "module": "index.js",
-  "types": "index.d.ts",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "index.ts",
-    "index.d.ts"
+    "lib"
   ],
   "scripts": {
-    "check": "biome check . --write"
+    "build": "node esbuild.js",
+    "check": "biome check . --write",
+    "dist": "npm run check && npm run build"
   },
   "dependencies": {
     "leb": "^1.0.0",
     "lzma": "^2.3.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.3"
+    "@biomejs/biome": "^1.8.3",
+    "esbuild": "^0.23.0"
   }
 }

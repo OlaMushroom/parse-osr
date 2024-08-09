@@ -1,5 +1,6 @@
 import { decodeUInt64 } from 'leb'
 import { decompress } from 'lzma'
+import { decodeMods } from './utils.js'
 let ptr = 0
 const arr = []
 const decoder = new TextDecoder('utf-8', {
@@ -26,14 +27,7 @@ function parseStr() {
   ptr++
   return ''
 }
-function decodeMods(n) {
-  if (n === 0) return n
-  const arr = []
-  for (let i = 0; i < 31; i++) if ((n & (1 << i)) >> i) arr.push(i)
-  if (arr.length > 1) return arr
-  return arr[0]
-}
-export function parse(replay, parseInfoOnly) {
+export function parse(replay, parseInfoOnly = false) {
   const data = []
   ptr = 0
   arr.length = 0
@@ -55,4 +49,9 @@ export function parse(replay, parseInfoOnly) {
   data.push(parseLE(8)) // Score ID
   if (ptr + 7 < arr.length) data.push(parseLE(8)) // Target practice
   return data
+}
+export function decode(data, mods = false) {
+  const a = data
+  if (mods) a[14] = decodeMods(a[14])
+  return a
 }
