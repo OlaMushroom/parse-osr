@@ -12,6 +12,9 @@
     "index.ts",
     "index.d.ts"
   ],
+  "scripts": {
+    "check": "biome check . --write"
+  },
   "dependencies": {
     "leb": "^1.0.0",
     "lzma": "^2.3.2"
