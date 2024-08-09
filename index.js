@@ -26,21 +26,21 @@ function parseStr() {
   ptr++
   return ''
 }
-function parseMods(n) {
+function decodeMods(n) {
   if (n === 0) return n
   const arr = []
   for (let i = 0; i < 31; i++) if ((n & (1 << i)) >> i) arr.push(i)
   if (arr.length > 1) return arr
   return arr[0]
 }
-export default function parse(replay, decode, parseInfoOnly) {
+export function parse(replay, parseInfoOnly) {
   const data = []
   ptr = 0
   arr.length = 0
   for (const v of replay) arr.push(v)
   data.push(parseByte()) // Mode
   data.push(parseLE(4)) // Version
-  for (let i = 0; i < 3; i++) data.push(parseStr()) // Name and hashes
+  for (let i = 0; i < 3; i++) data.push(parseStr()) // Hashes and name
   for (let i = 0; i < 6; i++) data.push(parseLE(2)) // Hit counts
   data.push(parseLE(4)) // Total score
   data.push(parseLE(2)) // Greatest combo
