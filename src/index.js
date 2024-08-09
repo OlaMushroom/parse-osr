@@ -1,6 +1,6 @@
 import { decodeUInt64 } from 'leb'
 import { decompress } from 'lzma'
-import { decodeMods } from './utils.js'
+import { decodeLifeBar, decodeMods } from './utils.js'
 let ptr = 0
 const arr = []
 const decoder = new TextDecoder('utf-8', {
@@ -10,10 +10,10 @@ function parseByte() {
   ptr++
   return arr[ptr - 1]
 }
-function parseLE(i) {
-  ptr += i
+function parseLE(bytes) {
+  ptr += bytes
   return arr
-    .slice(ptr - i, ptr)
+    .slice(ptr - bytes, ptr)
     .reduceRight((prev, current) => prev * 256 + current)
 }
 function parseStr() {
@@ -31,7 +31,7 @@ export function parse(replay, parseInfoOnly = false) {
   const data = []
   ptr = 0
   arr.length = 0
-  for (const v of replay) arr.push(v)
+  for (const val of replay) arr.push(val)
   data.push(parseByte()) // Mode
   data.push(parseLE(4)) // Version
   for (let i = 0; i < 3; i++) data.push(parseStr()) // Hashes and name
@@ -50,8 +50,9 @@ export function parse(replay, parseInfoOnly = false) {
   if (ptr + 7 < arr.length) data.push(parseLE(8)) // Target practice
   return data
 }
-export function decode(data, mods = false) {
+export function decode(data, options = { mods: false, lifeBar: false }) {
   const a = data
-  if (mods) a[14] = decodeMods(a[14])
+  if (options.mods) a[14] = decodeMods(a[14])
+  if (options.lifeBar) a[15] = decodeLifeBar(a[15])
   return a
 }

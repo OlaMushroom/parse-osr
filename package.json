@@ -12,9 +12,8 @@
     "lib"
   ],
   "scripts": {
-    "build": "node esbuild.js",
     "check": "biome check . --write",
-    "dist": "npm run check && npm run build",
+    "dist": "npm run check && node esbuild.js",
     "test": "node test/test.js"
   },
   "dependencies": {
