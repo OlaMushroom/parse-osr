@@ -1,8 +1,8 @@
 import { decodeUInt64 } from 'leb'
 import { decompress } from 'lzma'
-import { decodeLifeBar, decodeMods } from './utils.js'
+import { decodeMods, decodeStr, decodeTime } from './utils.js'
 let ptr = 0
-const arr = []
+let arr = []
 const decoder = new TextDecoder('utf-8', {
   fatal: true
 })
@@ -28,10 +28,10 @@ function parseStr() {
   return ''
 }
 export function parse(replay, parseInfoOnly = false) {
-  const data = []
   ptr = 0
   arr.length = 0
-  for (const val of replay) arr.push(val)
+  arr = [...replay]
+  const data = []
   data.push(parseByte()) // Mode
   data.push(parseLE(4)) // Version
   for (let i = 0; i < 3; i++) data.push(parseStr()) // Hashes and name
@@ -45,14 +45,17 @@ export function parse(replay, parseInfoOnly = false) {
   const len = parseLE(4) // Length
   data.push(len)
   ptr += len
-  if (!parseInfoOnly) data.push(decompress(arr.slice(ptr - len, ptr))) // Replay data
+  if (!parseInfoOnly)
+    data.push(decompress(Uint8Array.from(arr.slice(ptr - len, ptr)))) // Replay data
   data.push(parseLE(8)) // Score ID
   if (ptr + 7 < arr.length) data.push(parseLE(8)) // Target practice
   return data
 }
-export function decode(data, options = { mods: false, lifeBar: false }) {
+export function decode(data, options) {
   const a = data
   if (options.mods) a[14] = decodeMods(a[14])
-  if (options.lifeBar) a[15] = decodeLifeBar(a[15])
+  if (options.lifeBar) a[15] = decodeStr(a[15])
+  if (options.time) a[16] = decodeTime(a[16])
+  if (options.replayData) a[18] = decodeStr(a[18])
   return a
 }
