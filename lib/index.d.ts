@@ -15,3 +15,7 @@ export function decode(data: any[], options: {
   replayData?: boolean,
   time?: boolean
 }): any[]
+/**
+ * 
+*/
+export function objectify(data: any[]): object

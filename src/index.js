@@ -45,8 +45,8 @@ export function parse(replay, parseInfoOnly = false) {
   const len = parseLE(4) // Length
   data.push(len)
   ptr += len
-  if (!parseInfoOnly)
-    data.push(decompress(Uint8Array.from(arr.slice(ptr - len, ptr)))) // Replay data
+  if (parseInfoOnly) data.push('')
+  else data.push(decompress(Uint8Array.from(arr.slice(ptr - len, ptr)))) // Replay data
   data.push(parseLE(8)) // Score ID
   if (ptr + 7 < arr.length) data.push(parseLE(8)) // Target practice
   return data
@@ -59,3 +59,29 @@ export function decode(data, options) {
   if (options.replayData) a[18] = decodeStr(a[18])
   return a
 }
+export const objectify = data =>
+  Object.fromEntries(
+    [
+      'mode',
+      'ver',
+      'mapHash',
+      'name',
+      'replayHash',
+      'great',
+      'ok',
+      'meh',
+      'geki',
+      'katu',
+      'miss',
+      'score',
+      'combo',
+      'perfect',
+      'mods',
+      'lifeBar',
+      'time',
+      'length',
+      'replayData',
+      'id',
+      'tp'
+    ].map((key, index) => [key, data[index]])
+  )
