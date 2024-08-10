@@ -16,6 +16,7 @@ export function decode(data: any[], options: {
   time?: boolean
 }): any[]
 /**
- * 
+ * @param data An array containing the parsed replay data.
+ * @returns An object containing the parsed replay data.
 */
 export function objectify(data: any[]): object
