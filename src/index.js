@@ -34,8 +34,8 @@ export function parse(replay, parseInfoOnly = false) {
   data.push(parseLE(4)) // Version
   for (let i = 0; i < 3; i++) data.push(parseStr()) // Hashes and name
   for (let i = 0; i < 6; i++) data.push(parseLE(2)) // Hit counts
-  data.push(parseLE(4)) // Total score
-  data.push(parseLE(2)) // Greatest combo
+  data.push(parseLE(4)) // Score
+  data.push(parseLE(2)) // Combo
   data.push(parseByte()) // Perfect/FC
   data.push(parseLE(4)) // Mods
   data.push(parseStr()) // Life bar
