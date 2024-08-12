@@ -3,13 +3,13 @@
  * @param parseInfoOnly If true, only parse info and skip replay data.
  * @returns An array containing the parsed replay data.
  */
-export function parse(replay: ArrayBufferLike | Buffer, parseInfoOnly?: boolean): any[]
+export declare function parse(replay: ArrayBufferLike | Buffer, parseInfoOnly?: boolean): any[]
 /**
  * @param data An array containing parsed replay data.
  * @param options An object containing the decoding options.
  * @returns An array containing the decoded replay data.
  */
-export function decode(data: any[], options?: {
+export declare function decode(data: any[], options?: {
   lifeBar?: boolean,
   mods?: boolean,
   replayData?: boolean,
@@ -19,7 +19,7 @@ export function decode(data: any[], options?: {
  * @param data An array containing the parsed replay data.
  * @returns An object containing the parsed replay data.
 */
-export function objectify(data: any[]): {
+export declare function objectify(data: any[]): {
   mode: number,
   ver: number,
   map: string,
