@@ -3,9 +3,7 @@ import { decompress } from 'lzma'
 import { decodeMods, decodeStr, decodeTime } from './utils.js'
 let ptr = 0
 let arr = []
-const decoder = new TextDecoder('utf-8', {
-  fatal: true
-})
+const decoder = new TextDecoder()
 function parseByte() {
   ptr++
   return arr[ptr - 1]
@@ -46,9 +44,9 @@ export function parse(replay, parseInfoOnly = false) {
   data.push(len)
   ptr += len
   if (parseInfoOnly) data.push('')
-  else data.push(decompress(Uint8Array.from(arr.slice(ptr - len, ptr)))) // Replay data
-  data.push(parseLE(8)) // Score ID
-  if (ptr + 7 < arr.length) data.push(parseLE(8)) // Target practice
+  else data.push(decompress(arr.slice(ptr - len, ptr))) // Replay data
+  if (ptr + 8 < arr.length) data.push(parseLE(8)) // ID or TP
+  if (ptr + 8 < arr.length) data.push(parseLE(8)) // TP if ID
   return data
 }
 export function decode(data, options) {
@@ -64,9 +62,9 @@ export const objectify = data =>
     [
       'mode',
       'ver',
-      'mapHash',
+      'map',
       'name',
-      'replayHash',
+      'hash',
       'great',
       'ok',
       'meh',
@@ -80,7 +78,7 @@ export const objectify = data =>
       'lifeBar',
       'time',
       'length',
-      'replayData',
+      'data',
       'id',
       'tp'
     ].map((key, index) => [key, data[index]])
