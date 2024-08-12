@@ -1,7 +1,17 @@
 {
   "name": "parse-osr",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple parser for osu! replay (.osr) file format.",
+  "keywords": [
+    "parser",
+    "parse",
+    "parsing",
+    "replay",
+    "osr",
+    "osu",
+    "osugame"
+  ],
+  "bugs": "https://github.com/OlaMushroom/parse-osr/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OlaMushroom/parse-osr.git"
