@@ -6,7 +6,6 @@ import data from './data.json' with { type: 'json' }
 
 const dir = './test/replays'
 const files = readdirSync(dir)
-
 for (const file of files) {
   const replay = readFileSync(join(dir, file))
   const parsed = parse(replay, true)
