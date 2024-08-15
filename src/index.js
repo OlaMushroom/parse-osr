@@ -32,7 +32,7 @@ export function parse(replay, parseInfoOnly = false) {
   const data = []
   data.push(parseByte()) // Mode
   data.push(parseLE(4)) // Version
-  for (let i = 0; i < 3; i++) data.push(parseStr()) // Hashes and name
+  for (let i = 0; i < 3; i++) data.push(parseStr()) // Hashes & name
   for (let i = 0; i < 6; i++) data.push(parseLE(2)) // Hit counts
   data.push(parseLE(4)) // Score
   data.push(parseLE(2)) // Combo
@@ -45,7 +45,8 @@ export function parse(replay, parseInfoOnly = false) {
   ptr += len
   if (parseInfoOnly) data.push('')
   else data.push(decompress(arr.slice(ptr - len, ptr))) // Replay data
-  if (ptr + 7 < arr.length) data.push(parseLE(8)) // ID or TP
+  data.push(parseLE(8)) // ID
+  if (ptr + 7 < arr.length) data.push(parseLE(8)) // TP
   return data
 }
 export function decode(data, options) {
