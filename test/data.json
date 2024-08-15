@@ -1,12 +1,22 @@
 [
   {
     "mode": 0,
-    "great": 1053,
-    "ok": 18,
+    "great": 6471,
+    "ok": 32,
     "meh": 0,
     "miss": 0,
-    "score": 46354250,
-    "combo": 1467,
+    "score": 1630396713,
+    "combo": 9289,
+    "perfect": 1
+  },
+  {
+    "mode": 0,
+    "great": 75,
+    "ok": 0,
+    "meh": 0,
+    "miss": 0,
+    "score": 185067,
+    "combo": 84,
     "perfect": 1
   }
 ]

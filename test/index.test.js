@@ -5,10 +5,10 @@ import { parse } from '../src/index.js'
 import data from './data.json' with { type: 'json' }
 
 const dir = './test/replays'
-const files = readdirSync(dir).map(name => join(dir, name))
+const files = readdirSync(dir)
 
 for (const file of files) {
-  const replay = readFileSync(file)
+  const replay = readFileSync(join(dir, file))
   const parsed = parse(replay, true)
   const info = data[files.indexOf(file)]
   test(file, () => {
