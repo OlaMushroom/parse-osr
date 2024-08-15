@@ -45,8 +45,7 @@ export function parse(replay, parseInfoOnly = false) {
   ptr += len
   if (parseInfoOnly) data.push('')
   else data.push(decompress(arr.slice(ptr - len, ptr))) // Replay data
-  if (ptr + 8 < arr.length) data.push(parseLE(8)) // ID or TP
-  if (ptr + 8 < arr.length) data.push(parseLE(8)) // TP if ID
+  if (ptr + 7 < arr.length) data.push(parseLE(8)) // ID or TP
   return data
 }
 export function decode(data, options) {
