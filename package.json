@@ -1,6 +1,6 @@
 {
   "name": "parse-osr",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "A simple parser for osu! replay (.osr) file format.",
   "keywords": [
     "parser",
@@ -34,8 +34,8 @@
     "lzma": "^2.3.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.3",
-    "esbuild": "^0.23.0",
-    "vitest": "^2.0.5"
+    "@biomejs/biome": "^1.9.4",
+    "esbuild": "^0.24.2",
+    "vitest": "^3.0.2"
   }
 }

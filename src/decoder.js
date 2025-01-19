@@ -8,18 +8,17 @@ const decodeTime = data =>
   new Date(Number((BigInt(data) - 621355968000000000n) / 10000n))
 
 function decodeMods(data) {
-  if (data === 0) return data
+  if (data === 0) return [0]
   const arr = []
   for (let i = 0; i < 31; i++) if ((data & (1 << i)) >> i) arr.push(i)
-  if (arr.includes(9)) arr.splice(arr.indexOf(6), 1) // Remove DT when NC exists
-  return arr.length > 1 ? arr : arr[0]
+  return arr
 }
 
 export function decode(data, options) {
-  const a = data
-  if (options.mods) a[14] = decodeMods(a[14])
-  if (options.lifeBar) a[15] = decodeStr(a[15])
-  if (options.time) a[16] = decodeTime(a[16])
-  if (options.replayData) a[18] = decodeStr(a[18])
-  return a
+  const arr = [...data]
+  if (options.mods) arr[14] = decodeMods(arr[14])
+  if (options.lifeBar) arr[15] = decodeStr(arr[15])
+  if (options.time) arr[16] = decodeTime(arr[16])
+  if (options.replayData) arr[18] = decodeStr(arr[18])
+  return arr
 }

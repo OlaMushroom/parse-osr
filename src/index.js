@@ -24,5 +24,5 @@ export const objectify = data =>
       'data',
       'id',
       'tp'
-    ].map((key, index) => [key, data[index]])
+    ].map((key, index) => [key, data[index] !== undefined ? data[index] : null])
   )

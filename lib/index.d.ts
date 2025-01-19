@@ -18,7 +18,7 @@ export declare function decode(data: any[], options?: {
 /**
  * @param data An array containing the parsed replay data.
  * @returns An object containing the parsed replay data.
-*/
+ */
 export declare function objectify(data: any[]): {
   mode: number,
   ver: number,
@@ -34,7 +34,7 @@ export declare function objectify(data: any[]): {
   score: number,
   combo: number,
   perfect: number,
-  mods: number | number[],
+  mods: number[],
   lifeBar: string | number[],
   time: number | string,
   length: number,
